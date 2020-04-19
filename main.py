@@ -45,6 +45,9 @@ class MainCog(commands.Cog):
 
         :var latest_message: The most recent message in the desired channel
         :var oldest_message: The oldest message in the desired channel
+        :var date: A random datetime between the latest_message and oldest_message
+        :var quotes: List of messages around date
+        :var message: A random message from the quotes list
         """
         await ctx.message.delete()
 
@@ -53,12 +56,23 @@ class MainCog(commands.Cog):
 
         while True:
             date = random_date(oldest_message[0].created_at, latest_message[0].created_at)
-
             quotes = await ctx.channel.history(limit=50, around=date).flatten()
+
             try:
-                message = random.choice(quotes).content
-                await ctx.send(message)
+                message = random.choice(quotes)
+                if message.content == "":
+                    raise ValueError
+
+                main_embed = discord.Embed(colour=0x8292ab, description=message.content)
+                if len(message.raw_mentions) != 0:
+                    user = self.bot.get_user(message.raw_mentions[-1])
+                    main_embed.set_author(name=user.name, icon_url=user.avatar_url)
+                else:  # If there is no @ provided in the quote
+                    main_embed.set_author(name=message.author.name, icon_url=message.author.avatar_url)
+
+                await ctx.send(embed=main_embed)
                 break
+
             except Exception as error:
                 print(error)
 

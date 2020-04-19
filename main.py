@@ -1,5 +1,12 @@
+import datetime
+import random
+
 import discord
 from discord.ext import commands
+
+
+def random_date(start, end):
+    return start + datetime.timedelta(seconds=random.randint(0, int((end - start).total_seconds())))
 
 
 class MainCog(commands.Cog):
@@ -31,13 +38,29 @@ class MainCog(commands.Cog):
         await help_message.delete()
 
     @commands.command(name="quote", aliases=["q"])
-    async def quote(self, ctx, *args):
+    async def quote(self, ctx, quote_channel, *args):
         """
+        :param quote_channel: The channel the user wants a quote from
         :param ctx: Discord Context class
-        :var varName: description
-        """
 
+        :var latest_message: The most recent message in the desired channel
+        :var oldest_message: The oldest message in the desired channel
+        """
         await ctx.message.delete()
+
+        latest_message = await ctx.channel.history(limit=1).flatten()
+        oldest_message = await ctx.channel.history(limit=1, oldest_first=True).flatten()
+
+        while True:
+            date = random_date(oldest_message[0].created_at, latest_message[0].created_at)
+
+            quotes = await ctx.channel.history(limit=50, around=date).flatten()
+            try:
+                message = random.choice(quotes).content
+                await ctx.send(message)
+                break
+            except Exception as error:
+                print(error)
 
 
 quoter = commands.Bot(command_prefix="*", description="Quoting time")

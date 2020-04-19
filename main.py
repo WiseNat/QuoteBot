@@ -38,25 +38,28 @@ class MainCog(commands.Cog):
         await help_message.delete()
 
     @commands.command(name="quote", aliases=["q"])
-    async def quote(self, ctx, quote_channel, *args):
+    async def quote(self, ctx, channel_mention, *args):
         """
-        :param quote_channel: The channel the user wants a quote from
+        :param channel_mention: The channel the user wants a quote from (user must mention it)
         :param ctx: Discord Context class
 
+        :var quote_channel: Channel class for the channel the user wants a quote from
         :var latest_message: The most recent message in the desired channel
         :var oldest_message: The oldest message in the desired channel
         :var date: A random datetime between the latest_message and oldest_message
         :var quotes: List of messages around date
         :var message: A random message from the quotes list
         """
-        await ctx.message.delete()
 
-        latest_message = await ctx.channel.history(limit=1).flatten()
-        oldest_message = await ctx.channel.history(limit=1, oldest_first=True).flatten()
+        quote_channel = self.bot.get_channel(int(channel_mention[2:-1]))
+        latest_message = await quote_channel.history(limit=1).flatten()
+        oldest_message = await quote_channel.history(limit=1, oldest_first=True).flatten()
+
+        await ctx.message.delete()
 
         while True:
             date = random_date(oldest_message[0].created_at, latest_message[0].created_at)
-            quotes = await ctx.channel.history(limit=50, around=date).flatten()
+            quotes = await quote_channel.history(limit=50, around=date).flatten()
 
             try:
                 message = random.choice(quotes)
@@ -64,7 +67,7 @@ class MainCog(commands.Cog):
                     raise ValueError
 
                 main_embed = discord.Embed(colour=0x8292ab, description=message.content)
-                if len(message.raw_mentions) != 0:
+                if len(message.raw_mentions) != 0: # Getting the last mention as the quoted user
                     user = self.bot.get_user(message.raw_mentions[-1])
                     main_embed.set_author(name=user.name, icon_url=user.avatar_url)
                 else:  # If there is no @ provided in the quote

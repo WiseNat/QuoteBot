@@ -21,11 +21,8 @@ class MainCog(commands.Cog):
     async def help(self, ctx, *args):
         await ctx.message.delete()
 
-        main_embed = discord.Embed(title="__**Help Commands**__", colour=0x00ff00)
-        main_embed.add_field(name="**Command Help**",
-                             value="Remind me to do stuff here. Also *execute <code>, *settings and *help are all the "
-                                   "current commands",
-                             inline=False)
+        main_embed = discord.Embed(title="__**Help Commands**__", description="Just do *quote #channel or *q #channel",
+                                   colour=0x00ff00)
         help_message = await ctx.send(embed=main_embed)
 
         await help_message.add_reaction("<:cross:671116183780720670>")

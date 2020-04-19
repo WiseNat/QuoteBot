@@ -38,7 +38,7 @@ class MainCog(commands.Cog):
         await help_message.delete()
 
     @commands.command(name="quote", aliases=["q"])
-    async def quote(self, ctx, channel_mention, *args):
+    async def quote(self, ctx, *channel_mention):
         """
         :param channel_mention: The channel the user wants a quote from (user must mention it)
         :param ctx: Discord Context class
@@ -51,7 +51,11 @@ class MainCog(commands.Cog):
         :var message: A random message from the quotes list
         """
 
-        quote_channel = self.bot.get_channel(int(channel_mention[2:-1]))
+        if len(channel_mention) == 0:
+            quote_channel = ctx.channel
+        else:
+            quote_channel = self.bot.get_channel(int(channel_mention[0][2:-1]))
+
         latest_message = await quote_channel.history(limit=1).flatten()
         oldest_message = await quote_channel.history(limit=1, oldest_first=True).flatten()
 

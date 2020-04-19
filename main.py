@@ -68,7 +68,7 @@ class MainCog(commands.Cog):
                     raise ValueError
 
                 main_embed = discord.Embed(colour=0x8292ab, description=message.content)
-                if len(message.raw_mentions) != 0: # Getting the last mention as the quoted user
+                if len(message.raw_mentions) != 0:  # Getting the last mention as the quoted user
                     user = self.bot.get_user(message.raw_mentions[-1])
                     main_embed.set_author(name=user.name, icon_url=user.avatar_url)
                 else:  # If there is no @ provided in the quote

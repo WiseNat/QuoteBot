@@ -1,3 +1,3 @@
 # QuoteBot
-Just ignore this repo for now.
-Going to be working on a Discord quote bot that pulls a random message from a channel.
+It was a nice one day project.
+If, for whatever reason, you want to run this then just clone the repo and add a "token.secret" text file containing your bots token.

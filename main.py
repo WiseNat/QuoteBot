@@ -67,7 +67,8 @@ class MainCog(commands.Cog):
                 if message.content == "":
                     raise ValueError
 
-                main_embed = discord.Embed(colour=0x8292ab, description=message.content)
+                main_embed = discord.Embed(colour=0x8292ab, description=message.content + "\n\n[Jump to message](" +
+                                                                        message.jump_url + ")")
                 if len(message.raw_mentions) != 0:  # Getting the last mention as the quoted user
                     user = self.bot.get_user(message.raw_mentions[-1])
                     main_embed.set_author(name=user.name, icon_url=user.avatar_url)

@@ -60,7 +60,7 @@ class MainCog(commands.Cog):
 
         while True:
             date = random_date(oldest_message[0].created_at, latest_message[0].created_at)
-            quotes = await quote_channel.history(limit=5, around=date).flatten()
+            quotes = await quote_channel.history(limit=50, around=date).flatten()
 
             try:
                 message = random.choice(quotes)

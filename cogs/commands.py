@@ -9,13 +9,9 @@ def random_date(start, end):
     return start + datetime.timedelta(seconds=random.randint(0, int((end - start).total_seconds())))
 
 
-class MainCog(commands.Cog):
+class Commands(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-
-    @commands.Cog.listener()
-    async def on_ready(self):
-        print("----------\nLogged in as:\n{0}\n{1}\n----------".format(self.bot.user.name, self.bot.user.id))
 
     @commands.command(name="help", aliases=["h"])
     async def help(self, ctx, *args):
@@ -27,7 +23,7 @@ class MainCog(commands.Cog):
 
         await help_message.add_reaction("<:cross:671116183780720670>")
 
-        def check(reaction, user, *args):
+        def check(reaction, user):
             return str(reaction) == "<:cross:671116183780720670>" and str(reaction.message) == str(
                 help_message) and user != reaction.message.author
 
@@ -80,9 +76,3 @@ class MainCog(commands.Cog):
 
             except Exception as error:
                 print(error)
-
-
-quoter = commands.Bot(command_prefix="*", description="Quoting time")
-quoter.remove_command("help")
-quoter.add_cog(MainCog(quoter))
-quoter.run(open("token.secret", "r").read())

@@ -7,7 +7,7 @@ from cogs.commands import Commands
 class Bot(commands.Bot):
     def __init__(self):
         super().__init__(command_prefix="*", description="Quoting Time",
-                         activity=discord.Activity(type=discord.ActivityType.listening, name=" to *help"))
+                         activity=discord.Activity(type=discord.ActivityType.listening, name="*help"))
 
     async def on_ready(self):
         print("Name:\t{0}\nID:\t\t{1}".format(super().user.name, super().user.id))

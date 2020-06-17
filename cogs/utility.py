@@ -17,6 +17,9 @@ class Utility(commands.Cog):
         variant = variant.title().strip()
         desc = ""
 
+        if len(cog_list) == 0:
+            await ctx.send("`ERROR: MissingRequiredArgument - missing cog arguments.`")
+
         if variant not in ["Load", "Unload", "Reload"]:
             if variant != "Reloadall":
                 return

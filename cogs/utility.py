@@ -19,6 +19,7 @@ class Utility(commands.Cog):
 
         if len(cog_list) == 0:
             await ctx.send("`ERROR: MissingRequiredArgument - missing cog arguments.`")
+            return
 
         if variant not in ["Load", "Unload", "Reload"]:
             if variant != "Reloadall":

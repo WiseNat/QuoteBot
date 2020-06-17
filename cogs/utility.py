@@ -20,25 +20,17 @@ class Utility(commands.Cog):
         if variant not in ["Load", "Unload", "Reload"]:
             if variant != "Reloadall":
                 return
+            cog_list = self.bot.cog_list
 
-            for cog in self.bot.cog_list:
-                try:
+        for cog in cog_list:
+            try:
+                if variant in ["Unload", "Reload", "Reloadall"]:
                     self.bot.unload_extension(cog)
+                if variant in ["Load", "Reload", "Reloadall"]:
                     self.bot.load_extension(cog)
-                    desc += "<:tick:671116183751360523> | {}\n".format(cog)
-                except Exception as e:
-                    desc += "<:cross:671116183780720670> | {} ~ `{} - {}`\n".format(cog, type(e).__name__, e)
-
-        else:
-            for cog in cog_list:
-                try:
-                    if variant in ["Unload", "Reload"]:
-                        self.bot.unload_extension(cog)
-                    if variant in ["Load", "Reload"]:
-                        self.bot.load_extension(cog)
-                    desc += "<:tick:671116183751360523> | {}\n".format(cog)
-                except Exception as e:
-                    desc += "<:cross:671116183780720670> | {} ~ `{} - {}`\n".format(cog, type(e).__name__, e)
+                desc += "<:tick:671116183751360523> | {}\n".format(cog)
+            except Exception as e:
+                desc += "<:cross:671116183780720670> | {} ~ `{} - {}`\n".format(cog, type(e).__name__, e)
 
         embed = discord.Embed(title=variant, description=desc, colour=0x5288E5)
         await ctx.send(embed=embed)

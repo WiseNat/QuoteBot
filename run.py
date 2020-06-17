@@ -16,7 +16,7 @@ class Bot(commands.Bot):
         if isinstance(exception, commands.errors.CommandNotFound):
             return
         else:
-            await ctx.send("`{0}`".format(exception))
+            await ctx.send("`ERROR: {} - {}`".format(type(exception).__name__, exception))
 
     def run(self):
         super().run(open("token.secret", "r").read())

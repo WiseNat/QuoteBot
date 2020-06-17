@@ -17,9 +17,9 @@ class Commands(commands.Cog):
     async def help(self, ctx, *args):
         await ctx.message.delete()
 
-        main_embed = discord.Embed(title="__**Help Commands**__", description="Just do *quote #channel or *q #channel",
+        embed = discord.Embed(title="__**Help Commands**__", description="Just do *quote #channel or *q #channel",
                                    colour=0x00ff00)
-        help_message = await ctx.send(embed=main_embed)
+        help_message = await ctx.send(embed=embed)
 
         await help_message.add_reaction("<:cross:671116183780720670>")
 
@@ -31,7 +31,7 @@ class Commands(commands.Cog):
         await help_message.delete()
 
     @commands.command(name="quote", aliases=["q"])
-    async def quote(self, ctx, *channel_mention: str):
+    async def quote(self, ctx, channel_mention):
         """
         :param channel_mention: The channel the user wants a quote from (user must mention it)
         :param ctx: Discord Context class
@@ -76,3 +76,7 @@ class Commands(commands.Cog):
 
             except Exception as error:
                 print(error)
+
+
+def setup(bot):
+    bot.add_cog(Commands(bot))

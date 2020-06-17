@@ -1,13 +1,12 @@
 import discord
 from discord.ext import commands
 
-from cogs.commands import Commands
-
 
 class Bot(commands.Bot):
     def __init__(self):
         super().__init__(command_prefix="*", description="Quoting Time",
                          activity=discord.Activity(type=discord.ActivityType.listening, name="*help"))
+        self.cog_list = []
 
     async def on_ready(self):
         print("Name:\t{0}\nID:\t\t{1}".format(super().user.name, super().user.id))
@@ -21,9 +20,13 @@ class Bot(commands.Bot):
     def run(self):
         super().run(open("token.secret", "r").read())
 
+    def load_cog(self, cog):
+        super().load_extension(cog)
+        self.cog_list.append(cog)
+
 
 bot = Bot()
 bot.remove_command("help")
-bot.add_cog(Commands(bot))
+bot.load_cog("cogs.commands")
+bot.load_cog("cogs.utility")
 bot.run()
-

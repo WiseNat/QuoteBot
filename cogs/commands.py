@@ -31,7 +31,7 @@ class Commands(commands.Cog):
         await help_message.delete()
 
     @commands.command(name="quote", aliases=["q"])
-    async def quote(self, ctx, channel_mention: str):
+    async def quote(self, ctx, *channel_mention: str):
         """
         :param channel_mention: The channel the user wants a quote from (user must mention it)
         :param ctx: Discord Context class

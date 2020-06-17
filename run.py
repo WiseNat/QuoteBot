@@ -24,6 +24,6 @@ class Bot(commands.Bot):
 
 bot = Bot()
 bot.remove_command("help")
-bot.add_cog(Commands(bot))
+bot.load_extension("cogs.commands")
+bot.add_cog(Utility(bot))
 bot.run()
-

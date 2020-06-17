@@ -31,7 +31,7 @@ class Commands(commands.Cog):
         await help_message.delete()
 
     @commands.command(name="quote", aliases=["q"])
-    async def quote(self, ctx, *channel_mention):
+    async def quote(self, ctx, channel_mention: str):
         """
         :param channel_mention: The channel the user wants a quote from (user must mention it)
         :param ctx: Discord Context class
@@ -44,7 +44,7 @@ class Commands(commands.Cog):
         :var message: A random message from the quotes list
         """
 
-        if len(channel_mention) == 0:
+        if len(channel_mention) == 0 or not channel_mention.isdigit():
             quote_channel = ctx.channel
         else:
             quote_channel = self.bot.get_channel(int(channel_mention[0][2:-1]))

@@ -2,9 +2,9 @@
 "It was a nice one day project" - he said hoping and then realising it has been in constant development for a month.
 
 ## Setup
-If you actually want to setup this bot you'll need to do all of the following steps.
+If you actually want to setup this bot you'll need to do all of the following steps and install the correct dependencies.
 
-### Dependencies
+**Dependencies**
 Name        | Website URL
 ------------|------------
 Python 3.5+ | https://www.python.org/

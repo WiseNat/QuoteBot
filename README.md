@@ -4,6 +4,13 @@
 ## Setup
 If you actually want to setup this bot you'll need to do all of the following steps.
 
+### Dependencies
+Name        | Website URL
+------------|------------
+Python 3.5+ | https://www.python.org/
+discord.py  | https://discordpy.readthedocs.io/en/latest/intro.html#prerequisites
+
+
 ### Discord Developer Portal
 1. Go to [this website](https://discord.com/developers/applications) and sign in with your Discord account
 2. Click "New Application"

@@ -4,8 +4,7 @@
 ## Setup
 If you actually want to setup this bot you'll need to do all of the following steps and install the correct dependencies.
 
-**Dependencies**
-Name        | Website URL
+Dependency  | Website URL
 ------------|------------
 Python 3.5+ | https://www.python.org/
 discord.py  | https://discordpy.readthedocs.io/en/latest/intro.html#prerequisites

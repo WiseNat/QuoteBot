@@ -13,8 +13,8 @@ discord.py  | https://discordpy.readthedocs.io/en/latest/intro.html#prerequisite
 ### Discord Developer Portal
 1. Go to [this website](https://discord.com/developers/applications) and sign in with your Discord account
 2. Click "New Application"
-  i. Give it a name
-  ii. Click "Create"
+    1. Give it a name
+    2. Click "Create"
 3. Click on the application you just made
 4. Go to the Bot tab on the left
 5. Click "Add Bot" and agree to make the bot
@@ -30,7 +30,7 @@ discord.py  | https://discordpy.readthedocs.io/en/latest/intro.html#prerequisite
 
 ### Inviting the Bot
 1. Copy this link and paste it somewhere temporary - notepad for example
-  i. https://discordapp.com/oauth2/authorize?client_id=INSERT_CLIENT_ID_HERE&scope=bot&permissions=355392
+    1. https://discordapp.com/oauth2/authorize?client_id=INSERT_CLIENT_ID_HERE&scope=bot&permissions=355392
 2. Go back to the [Discord Developer Portal](https://discord.com/developers/applications) and sign in if you have to
 3. Go to the application you created earlier
 4. Click on "Copy" under Client ID

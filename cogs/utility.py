@@ -17,14 +17,14 @@ class Utility(commands.Cog):
         variant = variant.title().strip()
         desc = ""
 
-        if len(cog_list) == 0:
+        if len(cog_list) == 0 and variant != "Reloadall":
             await ctx.send("`ERROR: MissingRequiredArgument - missing cog arguments.`")
             return
 
         if variant not in ["Load", "Unload", "Reload"]:
-            if variant != "Reloadall":
-                return
-            cog_list = self.bot.cog_list
+            if variant == "Reloadall":
+                cog_list = self.bot.cog_list
+
 
         for cog in cog_list:
             try:
